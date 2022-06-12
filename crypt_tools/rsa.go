@@ -47,6 +47,16 @@ func RSAPrivateKeyFromHex(privateKey64 string) (privateKey *rsa.PrivateKey, err 
 	return
 }
 
+func RSAPrivateKeyToDer(privateKey *rsa.PrivateKey) (privateKeyDer []byte) {
+	privateKeyDer = x509.MarshalPKCS1PrivateKey(privateKey)
+	return
+}
+
+func RSAPrivateKeyFromDer(privateKeyDer []byte) (privateKey *rsa.PrivateKey, err error) {
+	privateKey, err = x509.ParsePKCS1PrivateKey(privateKeyDer)
+	return
+}
+
 func RSAPrivateKeyToPem(privateKey *rsa.PrivateKey) (privateKeyPem string) {
 	privateKeyBS := x509.MarshalPKCS1PrivateKey(privateKey)
 	block := pem.Block{
@@ -96,6 +106,16 @@ func RSAPublicKeyFromHex(publicKey64 string) (publicKey *rsa.PublicKey, err erro
 		return
 	}
 	publicKey, err = x509.ParsePKCS1PublicKey(publicKeyBS)
+	return
+}
+
+func RSAPublicKeyToDer(publicKey *rsa.PublicKey) (publicKeyDer []byte) {
+	publicKeyDer = x509.MarshalPKCS1PublicKey(publicKey)
+	return
+}
+
+func RSAPublicKeyFromDer(publicKeyDer []byte) (publicKey *rsa.PublicKey, err error) {
+	publicKey, err = x509.ParsePKCS1PublicKey(publicKeyDer)
 	return
 }
 
