@@ -1,5 +1,7 @@
 package consolecolors
 
+import "runtime"
+
 var Reset = "\033[0m"
 var Red = "\033[31m"
 var Green = "\033[32m"
@@ -11,7 +13,7 @@ var Gray = "\033[37m"
 var White = "\033[97m"
 
 func init() {
-	/*if runtime.GOOS == "windows" {
+	if runtime.GOOS == "windows" {
 		Reset = ""
 		Red = ""
 		Green = ""
@@ -21,5 +23,5 @@ func init() {
 		Cyan = ""
 		Gray = ""
 		White = ""
-	}*/
+	}
 }
