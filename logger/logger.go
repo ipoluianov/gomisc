@@ -9,6 +9,7 @@ import (
 	"sort"
 	"strconv"
 	"strings"
+	"sync"
 	"time"
 )
 
@@ -16,6 +17,7 @@ var logsPath string
 var loggerObject *log.Logger
 var currentLogFileName string
 var currentLogFile *os.File
+var mtx sync.Mutex
 
 var LogDepthDays = 30
 
@@ -167,6 +169,9 @@ func CheckLogFile() {
 }
 
 func Println(v ...interface{}) {
+	mtx.Lock()
+	defer mtx.Unlock()
+
 	CheckLogFile()
 	if loggerObject != nil {
 		loggerObject.Println(v...)
@@ -176,6 +181,9 @@ func Println(v ...interface{}) {
 }
 
 func Error(v ...interface{}) {
+	mtx.Lock()
+	defer mtx.Unlock()
+
 	CheckLogFile()
 	if loggerObject != nil {
 		loggerObject.Println(v...)
