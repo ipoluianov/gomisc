@@ -129,6 +129,10 @@ func GetDir(path string) ([]FileInfo, error) {
 }
 
 func CheckLogFile() {
+	if len(logsPath) == 0 {
+		return
+	}
+
 	var err error
 	logFile := logsPath + "/" + time.Now().Format("2006-01-02") + ".log"
 
