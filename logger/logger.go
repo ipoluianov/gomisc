@@ -36,10 +36,6 @@ func InitNearExe() {
 	Init(CurrentExePath() + "/logs")
 }
 
-func init() {
-	InitNearExe()
-}
-
 type FileInfo struct {
 	Path           string
 	Name           string
