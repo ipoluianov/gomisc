@@ -11,6 +11,8 @@ import (
 	"strings"
 	"sync"
 	"time"
+
+	consolecolors "github.com/ipoluianov/gomisc/console_colors"
 )
 
 var logsPath string
@@ -188,6 +190,8 @@ func Error(v ...interface{}) {
 	if loggerObject != nil {
 		loggerObject.Println(v...)
 	}
+	fmt.Print(consolecolors.Red)
 	fmt.Print(time.Now().UTC().Format("2006-01-02 15:04:05.999"), " ")
 	fmt.Println(v...)
+	fmt.Print(consolecolors.Reset)
 }
