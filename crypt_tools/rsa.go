@@ -18,12 +18,18 @@ func GenerateRSAKey() (privateKey *rsa.PrivateKey, err error) {
 }
 
 func RSAPrivateKeyToBase64(privateKey *rsa.PrivateKey) (privateKey64 string) {
+	if privateKey == nil {
+		return
+	}
 	privateKeyBS := x509.MarshalPKCS1PrivateKey(privateKey)
 	privateKey64 = base64.StdEncoding.EncodeToString(privateKeyBS)
 	return
 }
 
 func RSAPrivateKeyToBase58(privateKey *rsa.PrivateKey) (privateKey58 string) {
+	if privateKey == nil {
+		return
+	}
 	privateKeyBS := x509.MarshalPKCS1PrivateKey(privateKey)
 	privateKey58 = base58.Encode(privateKeyBS)
 	return
@@ -47,6 +53,9 @@ func RSAPrivateKeyFromBase58(privateKey58 string) (privateKey *rsa.PrivateKey, e
 }
 
 func RSAPrivateKeyToHex(privateKey *rsa.PrivateKey) (privateKey64 string) {
+	if privateKey == nil {
+		return
+	}
 	privateKeyBS := x509.MarshalPKCS1PrivateKey(privateKey)
 	privateKey64 = hex.EncodeToString(privateKeyBS)
 	return
@@ -63,6 +72,9 @@ func RSAPrivateKeyFromHex(privateKey64 string) (privateKey *rsa.PrivateKey, err 
 }
 
 func RSAPrivateKeyToDer(privateKey *rsa.PrivateKey) (privateKeyDer []byte) {
+	if privateKey == nil {
+		return
+	}
 	privateKeyDer = x509.MarshalPKCS1PrivateKey(privateKey)
 	return
 }
@@ -73,6 +85,9 @@ func RSAPrivateKeyFromDer(privateKeyDer []byte) (privateKey *rsa.PrivateKey, err
 }
 
 func RSAPrivateKeyToPem(privateKey *rsa.PrivateKey) (privateKeyPem string) {
+	if privateKey == nil {
+		return
+	}
 	privateKeyBS := x509.MarshalPKCS1PrivateKey(privateKey)
 	block := pem.Block{
 		Type:    "PRIVATE KEY",
@@ -93,12 +108,18 @@ func RSAPrivateKeyFromPem(privateKeyPem string) (privateKey *rsa.PrivateKey, err
 }
 
 func RSAPublicKeyToBase64(publicKey *rsa.PublicKey) (publicKey64 string) {
+	if publicKey == nil {
+		return
+	}
 	publicKeyBS := x509.MarshalPKCS1PublicKey(publicKey)
 	publicKey64 = base64.StdEncoding.EncodeToString(publicKeyBS)
 	return
 }
 
 func RSAPublicKeyToBase58(publicKey *rsa.PublicKey) (publicKey58 string) {
+	if publicKey == nil {
+		return
+	}
 	publicKeyBS := x509.MarshalPKCS1PublicKey(publicKey)
 	publicKey58 = base58.Encode(publicKeyBS)
 	return
@@ -122,6 +143,9 @@ func RSAPublicKeyFromBase58(publicKey58 string) (publicKey *rsa.PublicKey, err e
 }
 
 func RSAPublicKeyToHex(publicKey *rsa.PublicKey) (publicKey64 string) {
+	if publicKey == nil {
+		return
+	}
 	publicKeyBS := x509.MarshalPKCS1PublicKey(publicKey)
 	publicKey64 = hex.EncodeToString(publicKeyBS)
 	return
@@ -138,6 +162,9 @@ func RSAPublicKeyFromHex(publicKey64 string) (publicKey *rsa.PublicKey, err erro
 }
 
 func RSAPublicKeyToDer(publicKey *rsa.PublicKey) (publicKeyDer []byte) {
+	if publicKey == nil {
+		return
+	}
 	publicKeyDer = x509.MarshalPKCS1PublicKey(publicKey)
 	return
 }
@@ -148,6 +175,9 @@ func RSAPublicKeyFromDer(publicKeyDer []byte) (publicKey *rsa.PublicKey, err err
 }
 
 func RSAPublicKeyToPem(publicKey *rsa.PublicKey) (publicKeyPem string) {
+	if publicKey == nil {
+		return
+	}
 	publicKeyBS := x509.MarshalPKCS1PublicKey(publicKey)
 
 	block := pem.Block{
