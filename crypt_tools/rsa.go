@@ -8,8 +8,6 @@ import (
 	"encoding/hex"
 	"encoding/pem"
 	"errors"
-
-	"github.com/btcsuite/btcutil/base58"
 )
 
 func GenerateRSAKey() (privateKey *rsa.PrivateKey, err error) {
@@ -26,28 +24,12 @@ func RSAPrivateKeyToBase64(privateKey *rsa.PrivateKey) (privateKey64 string) {
 	return
 }
 
-func RSAPrivateKeyToBase58(privateKey *rsa.PrivateKey) (privateKey58 string) {
-	if privateKey == nil {
-		return
-	}
-	privateKeyBS := x509.MarshalPKCS1PrivateKey(privateKey)
-	privateKey58 = base58.Encode(privateKeyBS)
-	return
-}
-
 func RSAPrivateKeyFromBase64(privateKey64 string) (privateKey *rsa.PrivateKey, err error) {
 	var privateKeyBS []byte
 	privateKeyBS, err = base64.StdEncoding.DecodeString(privateKey64)
 	if err != nil {
 		return
 	}
-	privateKey, err = x509.ParsePKCS1PrivateKey(privateKeyBS)
-	return
-}
-
-func RSAPrivateKeyFromBase58(privateKey58 string) (privateKey *rsa.PrivateKey, err error) {
-	var privateKeyBS []byte
-	privateKeyBS = base58.Decode(privateKey58)
 	privateKey, err = x509.ParsePKCS1PrivateKey(privateKeyBS)
 	return
 }
@@ -116,28 +98,12 @@ func RSAPublicKeyToBase64(publicKey *rsa.PublicKey) (publicKey64 string) {
 	return
 }
 
-func RSAPublicKeyToBase58(publicKey *rsa.PublicKey) (publicKey58 string) {
-	if publicKey == nil {
-		return
-	}
-	publicKeyBS := x509.MarshalPKCS1PublicKey(publicKey)
-	publicKey58 = base58.Encode(publicKeyBS)
-	return
-}
-
 func RSAPublicKeyFromBase64(publicKey64 string) (publicKey *rsa.PublicKey, err error) {
 	var publicKeyBS []byte
 	publicKeyBS, err = base64.StdEncoding.DecodeString(publicKey64)
 	if err != nil {
 		return
 	}
-	publicKey, err = x509.ParsePKCS1PublicKey(publicKeyBS)
-	return
-}
-
-func RSAPublicKeyFromBase58(publicKey58 string) (publicKey *rsa.PublicKey, err error) {
-	var publicKeyBS []byte
-	publicKeyBS = base58.Decode(publicKey58)
 	publicKey, err = x509.ParsePKCS1PublicKey(publicKeyBS)
 	return
 }
